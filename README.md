@@ -1,17 +1,17 @@
 # IHEqualizerView
 A simple, intuitive audio asset visualiser for iOS and OSX.
 
-Getting Started
+#Getting Started
 
-To begin using EZAudio you must first make sure you have the proper build requirements.
+To begin using IHEqualizerView you must first make sure you have the proper build requirements.
 
-Build Requirements
+#Build Requirements
 
-iOS
+#iOS
 
 10.0+
 
-Adding To Project
+#Adding To Project
 
 You can add IHEqualizerView to your project in a few ways: 
 
