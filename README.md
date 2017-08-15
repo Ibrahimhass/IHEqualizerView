@@ -39,5 +39,5 @@ Make the UIView a subclass of IHEqualizerView, make its outlet and initialise as
     var url : URL?
     let path = Bundle.main.path(forResource: "bensound-sunny.mp3", ofType:nil)!
     url = URL(fileURLWithPath: path)
-    self.musicView.setUpView(urlToPlay: url!, 2.0, 1.0)
+    self.musicView.setUpView(urlToPlay: url!, lineWith: 2.0, lineSeperation: 1.0)
 
