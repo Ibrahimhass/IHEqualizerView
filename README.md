@@ -5,13 +5,13 @@ A simple, intuitive audio asset visualiser for iOS and OSX.
 
 To begin using IHEqualizerView you must first make sure you have the proper build requirements.
 
-#Build Requirements
+# Build Requirements
 
-#iOS
+# iOS
 
 10.0+
 
-#Adding To Project
+# Adding To Project
 
 You can add IHEqualizerView to your project in a few ways: 
 
