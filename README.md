@@ -37,7 +37,7 @@ Make the UIView a subclass of IHEqualizerView, make its outlet and initialise as
 
     // Getting the Path of the Audio Asset in this case this is bundled in to the main Bundle with the fileName 
     var url : URL?
-    let path = Bundle.main.path(forResource: "Tere Liye Mere Kareem (DownloadMp3Song.Net) (320Kbps).mp3", ofType:nil)!
+    let path = Bundle.main.path(forResource: "bensound-sunny.mp3", ofType:nil)!
     url = URL(fileURLWithPath: path)
     self.musicView.setUpView(urlToPlay: url!, 2.0, 1.0)
 
