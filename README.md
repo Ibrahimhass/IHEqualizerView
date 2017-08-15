@@ -7,6 +7,7 @@ Written purely in SWIFT. Very simple and lightweight. Hardly 128 lines of Code. 
 * Green line for low output
 * Yellow for medium
 * Red for high output
+* Based on the output distribution pattern of Recorder App from Apple
 
 # Getting Started
 
@@ -24,7 +25,7 @@ You can add IHEqualizerView to your project in a few ways:
 
 The way to use IHEqualizerView is to download the Ibrahimhass class in your project as is and use.
 
-# ScreeShot
+# ScreenShot
 ![simulator screen shot 16-aug-2017 12 23 44 am](https://user-images.githubusercontent.com/16992520/29331253-6c614fcc-8219-11e7-970a-d196bb2029e7.png)
 
 # Usage
