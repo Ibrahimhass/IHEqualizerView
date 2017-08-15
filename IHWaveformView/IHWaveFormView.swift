@@ -22,7 +22,7 @@ class IHWaveFormView: UIView, AVAudioPlayerDelegate {
     internal func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
         self.gameTimer.invalidate()
     }
-    func setUpView(urlToPlay : URL, _  lineWith : CGFloat?, _  lineSeperation : CGFloat?) {
+    func setUpView(urlToPlay : URL, lineWith : CGFloat?, lineSeperation : CGFloat?) {
         internallineWidth = 2.0
         internallineSeperation = 1.0
         if (lineWith != nil){
