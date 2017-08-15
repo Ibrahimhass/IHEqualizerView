@@ -93,7 +93,7 @@ class IHWaveFormView: UIView, AVAudioPlayerDelegate {
         let toYPoint : CGFloat = self.getReflectionPoint(yInput: fromYPoint)
         aPath.move(to: CGPoint(x:xPoint , y: fromYPoint))
         aPath.addLine(to: CGPoint(x: xPoint, y: toYPoint))
-        xPoint += internallineSeperation
+        xPoint += internallineWidth
         let diff = toYPoint - fromYPoint
         let shapeLayer1 = CAShapeLayer()
         let shapeLayer2 = CAShapeLayer()

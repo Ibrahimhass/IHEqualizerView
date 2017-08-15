@@ -12,7 +12,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         var url : URL?
-        let path = Bundle.main.path(forResource: "Tere Liye Mere Kareem (DownloadMp3Song.Net) (320Kbps).mp3", ofType:nil)!
+        let path = Bundle.main.path(forResource: "bensound-sunny.mp3", ofType:nil)!
         url = URL(fileURLWithPath: path)
         self.musicView.setUpView(urlToPlay: url!, lineWith: 2.0, lineSeperation: 1.0)
     }
