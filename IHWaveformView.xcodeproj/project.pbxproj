@@ -13,6 +13,7 @@
 		DB0611971F4059DD0092EF4C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB0611961F4059DD0092EF4C /* Assets.xcassets */; };
 		DB06119A1F4059DD0092EF4C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB0611981F4059DD0092EF4C /* LaunchScreen.storyboard */; };
 		DB0611A21F4070E80092EF4C /* Tere Liye Mere Kareem (DownloadMp3Song.Net) (320Kbps).mp3 in Resources */ = {isa = PBXBuildFile; fileRef = DB0611A11F4070E80092EF4C /* Tere Liye Mere Kareem (DownloadMp3Song.Net) (320Kbps).mp3 */; };
+		DB68D6D01F43787A001D69A1 /* IHWaveFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB68D6CF1F43787A001D69A1 /* IHWaveFormView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		DB0611991F4059DD0092EF4C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DB06119B1F4059DD0092EF4C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DB0611A11F4070E80092EF4C /* Tere Liye Mere Kareem (DownloadMp3Song.Net) (320Kbps).mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Tere Liye Mere Kareem (DownloadMp3Song.Net) (320Kbps).mp3"; sourceTree = "<group>"; };
+		DB68D6CF1F43787A001D69A1 /* IHWaveFormView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IHWaveFormView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,7 @@
 			children = (
 				DB06118F1F4059DD0092EF4C /* AppDelegate.swift */,
 				DB0611911F4059DD0092EF4C /* ViewController.swift */,
+				DB68D6CF1F43787A001D69A1 /* IHWaveFormView.swift */,
 				DB0611931F4059DD0092EF4C /* Main.storyboard */,
 				DB0611961F4059DD0092EF4C /* Assets.xcassets */,
 				DB0611981F4059DD0092EF4C /* LaunchScreen.storyboard */,
@@ -142,6 +145,7 @@
 			files = (
 				DB0611921F4059DD0092EF4C /* ViewController.swift in Sources */,
 				DB0611901F4059DD0092EF4C /* AppDelegate.swift in Sources */,
+				DB68D6D01F43787A001D69A1 /* IHWaveFormView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
