@@ -22,7 +22,24 @@ class IHWaveFormView: UIView, AVAudioPlayerDelegate {
     internal func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
         self.gameTimer.invalidate()
     }
+    func addCentreLine(){
+        let centerLineView : UIView = UIView.init(frame: CGRect.init(x: 0, y: self.frame.size.height / 2.0, width: self.frame.size.width, height: 1))
+        centerLineView.backgroundColor = self.invertColor(self.backgroundColor!)
+        self.addSubview(centerLineView)
+    }
+    func invertColor(_ color : UIColor) -> UIColor {
+        var r: CGFloat = 0, g: CGFloat = 0, b: CGFloat = 0, a: CGFloat = 0
+        self.backgroundColor?.getRed(&r, green: &g, blue: &b, alpha: &a)
+        let lineColor = UIColor.init(red: self.invert(r), green: self.invert(g), blue: self.invert(b), alpha: a)
+        return lineColor
+    }
+    func invert(_ val : CGFloat) -> CGFloat{
+        let newVal = 1.0 - val
+        return (newVal)
+    }
     func setUpView(urlToPlay : URL, lineWith : CGFloat?, lineSeperation : CGFloat?) {
+        self.addCentreLine()
+        self.addOverlayLabels()
         internallineWidth = 2.0
         internallineSeperation = 1.0
         if (lineWith != nil){
@@ -73,6 +90,18 @@ class IHWaveFormView: UIView, AVAudioPlayerDelegate {
             yOffSet = totalHeight * 5 + (yVal - 10)/(120 - 10) * totalHeight
         }
         return (yOffSet)
+    }
+    func addOverlayLabels() {
+        let values : [String] = ["0", "-1", "-3", "-6", "-7", "-10"]
+        var valuesFinal : [String] = values
+        valuesFinal += values.reversed()
+        for i in 0...11{
+            let topLabel = UILabel.init(frame: CGRect.init(x: 0, y: CGFloat(i) * self.frame.size.height / 12.0, width: self.frame.size.height / 12.0, height: self.frame.size.height / 12.0))
+            topLabel.text = "\(valuesFinal[i]) dB"
+            topLabel.textColor = self.invertColor(self.backgroundColor!)
+            topLabel.adjustsFontSizeToFitWidth = true
+            self.addSubview(topLabel)
+        }
     }
     private func getReflectionPoint(yInput : CGFloat) -> CGFloat{
         return (self.frame.size.height - CGFloat(abs(yInput)))
@@ -125,4 +154,14 @@ class IHWaveFormView: UIView, AVAudioPlayerDelegate {
             shapeLayer3.zPosition = 2.0
         }
     }
+    /*Invert Color*/
 }
+//extension UIColor {
+//    var coreImageColor: CIColor {
+//        return CIColor(color: self)
+//    }
+//    var components: (red: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat) {
+//        let coreImageColor = self.coreImageColor
+//        return (coreImageColor.red, coreImageColor.green, coreImageColor.blue, coreImageColor.alpha)
+//    }
+//}
