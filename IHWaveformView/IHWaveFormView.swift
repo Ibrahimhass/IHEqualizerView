@@ -93,12 +93,15 @@ class IHWaveFormView: UIView, AVAudioPlayerDelegate {
     }
     func addOverlayLabels() {
         let values : [String] = ["0", "-1", "-3", "-6", "-7", "-10"]
-        var valuesFinal : [String] = values
+        var valuesFinal : [String] = values + [" "]
         valuesFinal += values.reversed()
-        for i in 0...11{
-            let topLabel = UILabel.init(frame: CGRect.init(x: 0, y: CGFloat(i) * self.frame.size.height / 12.0, width: self.frame.size.height / 12.0, height: self.frame.size.height / 12.0))
+        for i in 0...12{
+            let topLabel = UILabel.init(frame: CGRect.init(x: 0, y: CGFloat(i) * self.frame.size.height / 12.0 - self.frame.size.height / 17.0, width: self.frame.size.height / 12.0, height: self.frame.size.height / 12.0))
+            topLabel.center.y = 0 + CGFloat(i) * self.frame.size.height / 12.0
             topLabel.text = "\(valuesFinal[i]) dB"
+            topLabel.textAlignment = .center
             topLabel.textColor = self.invertColor(self.backgroundColor!)
+//            topLabel.backgroundColor = .red
             topLabel.adjustsFontSizeToFitWidth = true
             self.addSubview(topLabel)
         }
@@ -147,7 +150,7 @@ class IHWaveFormView: UIView, AVAudioPlayerDelegate {
         else if (diff >= 0.67 * self.frame.size.height)
         {
             shapeLayer3.path = aPath.cgPath
-            shapeLayer3.strokeColor = UIColor.yellow.cgColor
+            shapeLayer3.strokeColor = UIColor.red.cgColor
             shapeLayer3.lineWidth = internallineWidth
             shapeLayer2.zPosition = 1.0
             shapeLayer1.zPosition = 0.0
