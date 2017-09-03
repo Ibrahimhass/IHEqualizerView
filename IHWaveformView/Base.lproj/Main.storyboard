@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina4_0" orientation="portrait">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -18,23 +19,20 @@
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qkK-6M-AuK" customClass="IHWaveFormView" customModule="IHWaveformView" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="209" width="320" height="150"/>
+                                <rect key="frame" x="0.0" y="276" width="414" height="184"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="320" id="anp-wZ-794"/>
-                                    <constraint firstAttribute="height" constant="150" id="nGZ-T9-3ed"/>
-                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="0.43137254901960786" green="0.43137254901960786" blue="0.49803921579999999" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="qkK-6M-AuK" secondAttribute="trailing" id="GD2-5p-t35"/>
-                            <constraint firstItem="qkK-6M-AuK" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Gdn-wU-uHP"/>
-                            <constraint firstItem="qkK-6M-AuK" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="P9O-Am-k41"/>
+                            <constraint firstItem="qkK-6M-AuK" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="FSY-pc-pCL"/>
+                            <constraint firstItem="qkK-6M-AuK" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Pz5-8B-6b9"/>
+                            <constraint firstItem="qkK-6M-AuK" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="Soq-Vl-TVr"/>
+                            <constraint firstItem="qkK-6M-AuK" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.25" id="dpX-2x-JCK"/>
                         </constraints>
                     </view>
                     <connections>

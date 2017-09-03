@@ -4,7 +4,7 @@
 //
 //  Created by Md Ibrahim Hassan on 16/08/17.
 //  Copyright © 2017 Md Ibrahim Hassan. All rights reserved.
-//
+// self.frame.size.height / 12.0
 
 import UIKit
 import AVFoundation
@@ -19,6 +19,14 @@ class IHWaveFormView: UIView, AVAudioPlayerDelegate {
     private var internallineWidth : CGFloat!
     private var internallineSeperation : CGFloat!
     
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        xPoint = 20
+    }
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        xPoint = 20
+    }
     internal func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
         self.gameTimer.invalidate()
     }
@@ -62,6 +70,7 @@ class IHWaveFormView: UIView, AVAudioPlayerDelegate {
             
             let duration = player.duration
             let val = CGFloat(duration) / (CGFloat(self.frame.size.width))
+            self.trackAudio()
             gameTimer = Timer.scheduledTimer(timeInterval: TimeInterval(val * (internallineWidth + internallineSeperation)), target: self, selector: #selector(trackAudio), userInfo: nil, repeats: true)
         } catch {
             // couldn't load file :(
@@ -93,9 +102,9 @@ class IHWaveFormView: UIView, AVAudioPlayerDelegate {
     }
     func addOverlayLabels() {
         let values : [String] = ["0", "-1", "-3", "-6", "-7", "-10"]
-        var valuesFinal : [String] = values + [" "]
+        var valuesFinal : [String] = values
         valuesFinal += values.reversed()
-        for i in 0...12{
+        for i in 0...11{
             let topLabel = UILabel.init(frame: CGRect.init(x: 0, y: CGFloat(i) * self.frame.size.height / 12.0 - self.frame.size.height / 17.0, width: self.frame.size.height / 12.0, height: self.frame.size.height / 12.0))
             topLabel.center.y = 0 + CGFloat(i) * self.frame.size.height / 12.0
             topLabel.text = "\(valuesFinal[i]) dB"
@@ -157,14 +166,4 @@ class IHWaveFormView: UIView, AVAudioPlayerDelegate {
             shapeLayer3.zPosition = 2.0
         }
     }
-    /*Invert Color*/
 }
-//extension UIColor {
-//    var coreImageColor: CIColor {
-//        return CIColor(color: self)
-//    }
-//    var components: (red: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat) {
-//        let coreImageColor = self.coreImageColor
-//        return (coreImageColor.red, coreImageColor.green, coreImageColor.blue, coreImageColor.alpha)
-//    }
-//}
