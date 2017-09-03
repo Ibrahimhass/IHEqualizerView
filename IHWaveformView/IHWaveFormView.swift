@@ -69,7 +69,7 @@ class IHWaveFormView: UIView, AVAudioPlayerDelegate {
             player.play()
             
             let duration = player.duration
-            let val = CGFloat(duration) / (CGFloat(self.frame.size.width))
+            let val = CGFloat(duration) / (CGFloat(self.frame.size.width) - 20.0)
             self.trackAudio()
             gameTimer = Timer.scheduledTimer(timeInterval: TimeInterval(val * (internallineWidth + internallineSeperation)), target: self, selector: #selector(trackAudio), userInfo: nil, repeats: true)
         } catch {
@@ -106,7 +106,7 @@ class IHWaveFormView: UIView, AVAudioPlayerDelegate {
         valuesFinal += values.reversed()
         for i in 0...11{
             let topLabel = UILabel.init(frame: CGRect.init(x: 0, y: CGFloat(i) * self.frame.size.height / 12.0 - self.frame.size.height / 17.0, width: self.frame.size.height / 12.0, height: self.frame.size.height / 12.0))
-            topLabel.center.y = 0 + CGFloat(i) * self.frame.size.height / 12.0
+            topLabel.center.y = 5 + CGFloat(i) * self.frame.size.height / 12.0
             topLabel.text = "\(valuesFinal[i]) dB"
             topLabel.textAlignment = .center
             topLabel.textColor = self.invertColor(self.backgroundColor!)
