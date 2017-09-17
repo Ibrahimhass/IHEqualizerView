@@ -61,13 +61,21 @@
 			children = (
 				DB06118F1F4059DD0092EF4C /* AppDelegate.swift */,
 				DB0611911F4059DD0092EF4C /* ViewController.swift */,
-				DB68D6CF1F43787A001D69A1 /* IHWaveFormView.swift */,
+				DB4D6B971F6E30A00020C94B /* source */,
 				DB0611931F4059DD0092EF4C /* Main.storyboard */,
 				DB0611961F4059DD0092EF4C /* Assets.xcassets */,
 				DB0611981F4059DD0092EF4C /* LaunchScreen.storyboard */,
 				DB06119B1F4059DD0092EF4C /* Info.plist */,
 			);
 			path = IHWaveformView;
+			sourceTree = "<group>";
+		};
+		DB4D6B971F6E30A00020C94B /* source */ = {
+			isa = PBXGroup;
+			children = (
+				DB68D6CF1F43787A001D69A1 /* IHWaveFormView.swift */,
+			);
+			name = source;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
