@@ -12,7 +12,6 @@
 		DB0611951F4059DD0092EF4C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB0611931F4059DD0092EF4C /* Main.storyboard */; };
 		DB0611971F4059DD0092EF4C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB0611961F4059DD0092EF4C /* Assets.xcassets */; };
 		DB06119A1F4059DD0092EF4C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB0611981F4059DD0092EF4C /* LaunchScreen.storyboard */; };
-		DB419C201F4B5695008F7F34 /* videoplayback (5).mp3 in Resources */ = {isa = PBXBuildFile; fileRef = DB419C1F1F4B5695008F7F34 /* videoplayback (5).mp3 */; };
 		DB68D6D01F43787A001D69A1 /* IHWaveFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB68D6CF1F43787A001D69A1 /* IHWaveFormView.swift */; };
 		DB68D6D21F437E5F001D69A1 /* bensound-sunny.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = DB68D6D11F437E5F001D69A1 /* bensound-sunny.mp3 */; };
 /* End PBXBuildFile section */
@@ -25,7 +24,6 @@
 		DB0611961F4059DD0092EF4C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DB0611991F4059DD0092EF4C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DB06119B1F4059DD0092EF4C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		DB419C1F1F4B5695008F7F34 /* videoplayback (5).mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "videoplayback (5).mp3"; sourceTree = "<group>"; };
 		DB68D6CF1F43787A001D69A1 /* IHWaveFormView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IHWaveFormView.swift; sourceTree = "<group>"; };
 		DB68D6D11F437E5F001D69A1 /* bensound-sunny.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "bensound-sunny.mp3"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -47,7 +45,6 @@
 				DB06118E1F4059DD0092EF4C /* IHWaveformView */,
 				DB06118D1F4059DD0092EF4C /* Products */,
 				DB68D6D11F437E5F001D69A1 /* bensound-sunny.mp3 */,
-				DB419C1F1F4B5695008F7F34 /* videoplayback (5).mp3 */,
 			);
 			sourceTree = "<group>";
 		};
@@ -133,7 +130,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				DB68D6D21F437E5F001D69A1 /* bensound-sunny.mp3 in Resources */,
-				DB419C201F4B5695008F7F34 /* videoplayback (5).mp3 in Resources */,
 				DB06119A1F4059DD0092EF4C /* LaunchScreen.storyboard in Resources */,
 				DB0611971F4059DD0092EF4C /* Assets.xcassets in Resources */,
 				DB0611951F4059DD0092EF4C /* Main.storyboard in Resources */,
