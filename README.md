@@ -4,8 +4,8 @@ A simple, intuitive audio asset visualiser for iOS.
 # HighLights
 Written purely in SWIFT. Very simple and lightweight. Hardly 128 lines of Code. Color Coding for differnt output range 
 
-* Green line for low output
-* Yellow for medium
+* Pale red for low output
+* Light red for medium
 * Red for high output
 * Based on the output distribution pattern of Recorder App from Apple
 
