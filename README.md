@@ -23,7 +23,7 @@ To begin using IHEqualizerView you must first make sure you have the proper buil
 
 You can add IHEqualizerView to your project in a few ways: 
 
-The way to use IHEqualizerView is to download the Ibrahimhass class in your project as is and use.
+The way to use IHEqualizerView is to download the IHWaveFormView class file in your project as is and use.
 
 # ScreenShot
 ![simulator screen shot 16-aug-2017 12 23 44 am](https://i.stack.imgur.com/HsdX1.gif)
