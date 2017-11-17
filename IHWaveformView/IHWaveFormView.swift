@@ -97,7 +97,7 @@ class IHWaveFormView: UIView, AVAudioPlayerDelegate {
             bombSoundEffect.isMeteringEnabled = true
             player.play()
             let duration = player.duration
-            let val : CGFloat = CGFloat(duration) / CGFloat(self.frame.size.width)
+            let val : CGFloat = CGFloat(duration) / (CGFloat(self.frame.size.width) * CGFloat(player.rate))
             self.trackAudio()
             gameTimer = Timer.scheduledTimer(timeInterval: TimeInterval(val * (internallineWidth + internallineSeperation)), target: self, selector: #selector(trackAudio), userInfo: nil, repeats: true)
         } catch {
