@@ -21,7 +21,15 @@
 //SOFTWARE.
 
 import UIKit
-class ViewController: UIViewController {
+class ViewController: UIViewController, IHWaveFormViewDelegate {
+    func didFinishPlayBack() {
+        print ("playBack Finished")
+    }
+    
+    func didStartPlayingWithSuccess() {
+        "Playback started successfully"
+    }
+    
     @IBOutlet var musicView: IHWaveFormView!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +38,8 @@ class ViewController: UIViewController {
         url = URL(fileURLWithPath: path)
         self.musicView.setUpView(urlToPlay: url!, lineWith: 2.0, lineSeperation: 1.0)
         self.musicView.backgroundColor = #colorLiteral(red: 0.9607843137, green: 0.9607843137, blue: 0.8509803922, alpha: 1)
+        self.musicView.delegate = self
         
     }
+    
 }

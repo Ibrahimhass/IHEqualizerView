@@ -23,6 +23,13 @@
 import UIKit
 import AVFoundation
 
+protocol IHWaveFormViewDelegate : class {
+    
+    func didFinishPlayBack()
+    func didStartPlayingWithSuccess()
+    
+}
+
 class IHWaveFormView: UIView, AVAudioPlayerDelegate {
     private var bombSoundEffect: AVAudioPlayer!
     private var dataArray : [Float] = []
@@ -32,6 +39,8 @@ class IHWaveFormView: UIView, AVAudioPlayerDelegate {
     private var gameTimer: Timer!
     private var internallineWidth : CGFloat!
     private var internallineSeperation : CGFloat!
+    weak var delegate : IHWaveFormViewDelegate?
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         xPoint = 0.0
@@ -43,6 +52,7 @@ class IHWaveFormView: UIView, AVAudioPlayerDelegate {
     }
     internal func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
         self.gameTimer.invalidate()
+        delegate?.didFinishPlayBack()
     }
     var centerLineView : UIView?
     func addCentreLine(){
@@ -96,6 +106,7 @@ class IHWaveFormView: UIView, AVAudioPlayerDelegate {
             bombSoundEffect.enableRate = true
             bombSoundEffect.isMeteringEnabled = true
             player.play()
+            delegate?.didStartPlayingWithSuccess()
             let duration = player.duration
             let val : CGFloat = CGFloat(duration) / (CGFloat(self.frame.size.width) * CGFloat(player.rate))
             self.trackAudio()
