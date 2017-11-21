@@ -72,7 +72,7 @@ class IHWaveFormView: UIView, AVAudioPlayerDelegate {
         redrawView()
     }
     
-    privat/Users/mdibrahimhassan/Desktop/IHEqualizerView/IHWaveformView.xcodeproje func eraseView() {
+   func eraseView() {
         for views in subviews {
             views.removeFromSuperview()
         }
