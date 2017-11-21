@@ -24,97 +24,147 @@ import UIKit
 import AVFoundation
 
 protocol IHWaveFormViewDelegate : class {
-    
     func didFinishPlayBack()
     func didStartPlayingWithSuccess()
-    
+}
+
+@objc protocol IHWaveFormViewDataSource : class {
+    func urlToPlay() -> URL
+    @objc optional func lineWidth() -> CGFloat
+    @objc optional func lineSeperation() -> CGFloat
 }
 
 class IHWaveFormView: UIView, AVAudioPlayerDelegate {
-    private var bombSoundEffect: AVAudioPlayer!
+    private var player: AVAudioPlayer!
     private var dataArray : [Float] = []
     private var totalCount : Int = 0
     private var xPoint : CGFloat = 0.0
-    private var player : AVAudioPlayer!
     private var gameTimer: Timer!
-    private var internallineWidth : CGFloat!
-    private var internallineSeperation : CGFloat!
+    private var internalLineWidth : CGFloat!
+    private var internalLineSeperation : CGFloat!
     weak var delegate : IHWaveFormViewDelegate?
+    weak var dataSource : IHWaveFormViewDataSource?
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         xPoint = 0.0
     }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        xPoint = 0.0
+    }
+    
+    fileprivate var width : CGFloat?
+    
     override func draw(_ rect: CGRect) {
         super.draw(rect)
         self.commonInit()
-        self.getPath(url: urlToPlaym!)
+        self.getPath(url: urlToPlay!)
     }
+    
+    var orientationChangesCount : Int = 0
+    func rotated(sender: UIDeviceOrientation) {
+        orientationChangesCount += 1
+            if (orientationChangesCount == 1) {
+                return
+            }
+        redrawView()
+    }
+    
+    privat/Users/mdibrahimhassan/Desktop/IHEqualizerView/IHWaveformView.xcodeproje func eraseView() {
+        for views in subviews {
+            views.removeFromSuperview()
+        }
+        self.layer.sublayers?.forEach { $0.removeFromSuperlayer() }
+    }
+    
     internal func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
         self.gameTimer.invalidate()
         delegate?.didFinishPlayBack()
     }
+    
     var centerLineView : UIView?
+    
     func addCentreLine(){
         centerLineView = UIView.init(frame: CGRect.init(x: 0, y: self.frame.size.height / 2.0, width: self.frame.size.width, height: 1))
         centerLineView?.backgroundColor = .black
         self.addSubview(centerLineView!)
     }
+    
     func invertColor(_ color : UIColor) -> UIColor {
         var r: CGFloat = 0, g: CGFloat = 0, b: CGFloat = 0, a: CGFloat = 0
         self.backgroundColor?.getRed(&r, green: &g, blue: &b, alpha: &a)
         let lineColor = UIColor.init(red: self.invertB(r), green: self.invertB(g), blue: self.invert(b), alpha: a)
         return lineColor
     }
+    
     func invertB(_ val : CGFloat) -> CGFloat{
         return (1.0 - val) * 0.9
     }
+    
     func invert(_ val : CGFloat) -> CGFloat{
         if (val > 0.6 && val < 0.90){
             return 0.6 + 0.1
         }
         return (1.0 - val)
     }
-    /*func reduce(_ val : CGFloat, _ amount : CGFloat?) -> CGFloat {
-     if amount == nil {
-     return (val * 0.9 * amount!)
-     }
-     return (val * 0.9 * 0.1)
-     }*/
-    private var urlToPlaym : URL?
+    
+    private var urlToPlay : URL?
+    
     func setUpView(urlToPlay : URL, lineWith : CGFloat?, lineSeperation : CGFloat?) {
         if (lineWith != nil){
-            internallineWidth = lineWith
+            internalLineWidth = lineWith
         }
         if (lineSeperation != nil){
-            internallineSeperation = lineSeperation
+            internalLineSeperation = lineSeperation
         }
-        urlToPlaym = urlToPlay
-        //        bombSoundEffect.rate = 3.0
+        self.urlToPlay = urlToPlay
     }
+    
     func commonInit(){
-        internallineWidth = 2.0
-        internallineSeperation = 1.0
+        internalLineWidth = 2.0
+        internalLineSeperation = 1.0
         //        self.addOverlayLabels()
         self.addCentreLine()
     }
+    
     private func getPath(url : URL){
         do {
+            if player != nil,
+                (player.isPlaying) {
+                xPoint = 0
+                    for i in dataArray {
+                        if (xPoint < CGFloat(player.currentTime) / CGFloat(player.duration) * self.bounds.width) {
+                            let twoDecimalPlaces = String(format: "%.2f", i)
+                            self.generatePoints1(dBVal: twoDecimalPlaces)
+                        }
+                        else{
+                            break
+                        }
+                    }
+                
+                let val : CGFloat = CGFloat(player.duration) / (CGFloat(self.frame.size.width - xPoint) * CGFloat(player.rate))
+                self.trackAudio()
+                gameTimer.invalidate()
+                gameTimer = Timer.scheduledTimer(timeInterval: TimeInterval(val * (internalLineWidth + internalLineSeperation)), target: self, selector: #selector(trackAudio), userInfo: nil, repeats: true)
+                return
+            }
             player = try AVAudioPlayer(contentsOf: url)
-            bombSoundEffect = player
-            bombSoundEffect.delegate = self
-            bombSoundEffect.enableRate = true
-            bombSoundEffect.isMeteringEnabled = true
+            player.delegate = self
+            player.enableRate = true
+            player.isMeteringEnabled = true
             player.play()
             delegate?.didStartPlayingWithSuccess()
             let duration = player.duration
             let val : CGFloat = CGFloat(duration) / (CGFloat(self.frame.size.width) * CGFloat(player.rate))
             self.trackAudio()
-            gameTimer = Timer.scheduledTimer(timeInterval: TimeInterval(val * (internallineWidth + internallineSeperation)), target: self, selector: #selector(trackAudio), userInfo: nil, repeats: true)
+            gameTimer = Timer.scheduledTimer(timeInterval: TimeInterval(val * (internalLineWidth + internalLineSeperation)), target: self, selector: #selector(trackAudio), userInfo: nil, repeats: true)
         } catch {
             // couldn't load file :(
         }
     }
+    
     private func makeNewWaveForm(_ yValNegative : CGFloat) -> (CGFloat){
         let totalHeight = self.frame.size.height / 12.0
         let yVal : CGFloat = CGFloat(abs(yValNegative))
@@ -139,31 +189,28 @@ class IHWaveFormView: UIView, AVAudioPlayerDelegate {
         }
         return (yOffSet)
     }
-    //    func addOverlayLabels() {
-    //        let values : [String] = ["0", "-1", "-3", "-6", "-7", "-10"]
-    //        var valuesFinal : [String] = values
-    //        valuesFinal += values.reversed()
-    //        for i in 0...11{
-    //            let topLabel = UILabel.init(frame: CGRect.init(x: 2, y: CGFloat(i) * self.frame.size.height / 12.0 - self.frame.size.height / 17.25, width: self.frame.size.height / 12.0, height: self.frame.size.height / 12.0))
-    //            topLabel.center.y = 5 + CGFloat(i) * self.frame.size.height / 12.0
-    //            topLabel.text = "\(valuesFinal[i]) dB"
-    //            topLabel.textAlignment = .center
-    //            topLabel.textColor = self.invertColor(self.backgroundColor!)
-    //            topLabel.adjustsFontSizeToFitWidth = true
-    //            self.addSubview(topLabel)
-    //        }
-    //    }
+    
     private func getReflectionPoint(yInput : CGFloat) -> CGFloat{
         return (self.frame.size.height - CGFloat(abs(yInput)))
     }
+    
     @objc private func trackAudio() {
-        bombSoundEffect.updateMeters()
-        let dBLogValue : Float = bombSoundEffect.averagePower(forChannel: 0)
+        NotificationCenter.default.addObserver(self, selector: #selector(rotated(sender:)), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
+        player.updateMeters()
+        let dBLogValue : Float = player.averagePower(forChannel: 0)
         dataArray.append(dBLogValue)
         let twoDecimalPlaces = String(format: "%.2f", dataArray[totalCount])
         totalCount += 1
         self.generatePoints1(dBVal: twoDecimalPlaces)
     }
+    
+    private func redrawView() {
+        eraseView()
+        self.commonInit()
+        self.getPath(url: urlToPlay!)
+    }
+
+    
     private func generatePoints1(dBVal : String){
         let aPath = UIBezierPath()
         let floatVal : Float = Float(dBVal)!
@@ -181,13 +228,13 @@ class IHWaveFormView: UIView, AVAudioPlayerDelegate {
         if diff <= 0.33 * self.frame.size.height {
             shapeLayer1.path = aPath.cgPath
             shapeLayer1.strokeColor = #colorLiteral(red: 0.937254902, green: 0.5058823529, blue: 0.4941176471, alpha: 1).cgColor
-            shapeLayer1.lineWidth = internallineWidth
+            shapeLayer1.lineWidth = internalLineWidth
             shapeLayer1.zPosition = 2.0
         }
         else if (diff <= self.frame.size.height * 0.66 && diff >= 0.33 * self.frame.size.height) {
             shapeLayer2.path = aPath.cgPath
             shapeLayer2.strokeColor = #colorLiteral(red: 0.7882352941, green: 0.3647058824, blue: 0.3529411765, alpha: 1).cgColor
-            shapeLayer2.lineWidth = internallineWidth
+            shapeLayer2.lineWidth = internalLineWidth
             shapeLayer1.zPosition = 0.0
             shapeLayer3.zPosition = 1.0
             shapeLayer2.zPosition = 2.0
@@ -196,12 +243,32 @@ class IHWaveFormView: UIView, AVAudioPlayerDelegate {
         {
             shapeLayer3.path = aPath.cgPath
             shapeLayer3.strokeColor = #colorLiteral(red: 0.7294117647, green: 0.1610280275, blue: 0.1210218742, alpha: 1).cgColor
-            shapeLayer3.lineWidth = internallineWidth
+            shapeLayer3.lineWidth = internalLineWidth
             shapeLayer2.zPosition = 1.0
             shapeLayer1.zPosition = 0.0
             shapeLayer3.zPosition = 2.0
         }
-        xPoint += internallineSeperation
-        xPoint += internallineWidth
+        xPoint += internalLineSeperation
+        xPoint += internalLineWidth
     }
 }
+//    func addOverlayLabels() {
+//        let values : [String] = ["0", "-1", "-3", "-6", "-7", "-10"]
+//        var valuesFinal : [String] = values
+//        valuesFinal += values.reversed()
+//        for i in 0...11{
+//            let topLabel = UILabel.init(frame: CGRect.init(x: 2, y: CGFloat(i) * self.frame.size.height / 12.0 - self.frame.size.height / 17.25, width: self.frame.size.height / 12.0, height: self.frame.size.height / 12.0))
+//            topLabel.center.y = 5 + CGFloat(i) * self.frame.size.height / 12.0
+//            topLabel.text = "\(valuesFinal[i]) dB"
+//            topLabel.textAlignment = .center
+//            topLabel.textColor = self.invertColor(self.backgroundColor!)
+//            topLabel.adjustsFontSizeToFitWidth = true
+//            self.addSubview(topLabel)
+//        }
+//    }
+/*func reduce(_ val : CGFloat, _ amount : CGFloat?) -> CGFloat {
+ if amount == nil {
+ return (val * 0.9 * amount!)
+ }
+ return (val * 0.9 * 0.1)
+ }*/
