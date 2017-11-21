@@ -36,15 +36,28 @@ protocol IHWaveFormViewDelegate : class {
 
 class IHWaveFormView: UIView, AVAudioPlayerDelegate {
     private var player: AVAudioPlayer!
+    fileprivate let centerLineView = UIView()
     private var dataArray : [Float] = []
     private var totalCount : Int = 0
     private var xPoint : CGFloat = 0.0
     private var gameTimer: Timer!
-    private var internalLineWidth : CGFloat!
-    private var internalLineSeperation : CGFloat!
-    weak var delegate : IHWaveFormViewDelegate?
-    weak var dataSource : IHWaveFormViewDataSource?
+    private var internalLineWidth : CGFloat = 2.0
+    private var internalLineSeperation : CGFloat = 1.0
+    fileprivate var width : CGFloat?
     
+    private var urlToPlay : URL {
+        return (dataSource?.urlToPlay())!
+    }
+
+    weak var delegate : IHWaveFormViewDelegate?
+    weak var dataSource : IHWaveFormViewDataSource? {
+        didSet {
+            if (dataSource?.urlToPlay() != nil) {
+                self.getPath(url: (dataSource?.urlToPlay())!)
+            }
+        }
+    }
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         xPoint = 0.0
@@ -55,12 +68,9 @@ class IHWaveFormView: UIView, AVAudioPlayerDelegate {
         xPoint = 0.0
     }
     
-    fileprivate var width : CGFloat?
-    
     override func draw(_ rect: CGRect) {
         super.draw(rect)
-        self.commonInit()
-        self.getPath(url: urlToPlay!)
+        commonInit()
     }
     
     var orientationChangesCount : Int = 0
@@ -72,61 +82,53 @@ class IHWaveFormView: UIView, AVAudioPlayerDelegate {
         redrawView()
     }
     
-   func eraseView() {
+   private func eraseView() {
         for views in subviews {
             views.removeFromSuperview()
         }
         self.layer.sublayers?.forEach { $0.removeFromSuperlayer() }
     }
     
-    internal func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
         self.gameTimer.invalidate()
         delegate?.didFinishPlayBack()
     }
     
-    var centerLineView : UIView?
     
-    func addCentreLine(){
-        centerLineView = UIView.init(frame: CGRect.init(x: 0, y: self.frame.size.height / 2.0, width: self.frame.size.width, height: 1))
-        centerLineView?.backgroundColor = .black
-        self.addSubview(centerLineView!)
+    private func addCentreLine(){
+        centerLineView.frame = CGRect.init(x: 0, y: self.frame.size.height / 2.0, width: self.frame.size.width, height: 1)
+        centerLineView.backgroundColor = .black
+        self.addSubview(centerLineView)
     }
     
-    func invertColor(_ color : UIColor) -> UIColor {
+    private func invertColor(_ color : UIColor) -> UIColor {
         var r: CGFloat = 0, g: CGFloat = 0, b: CGFloat = 0, a: CGFloat = 0
         self.backgroundColor?.getRed(&r, green: &g, blue: &b, alpha: &a)
         let lineColor = UIColor.init(red: self.invertB(r), green: self.invertB(g), blue: self.invert(b), alpha: a)
         return lineColor
     }
     
-    func invertB(_ val : CGFloat) -> CGFloat{
+    private func invertB(_ val : CGFloat) -> CGFloat{
         return (1.0 - val) * 0.9
     }
     
-    func invert(_ val : CGFloat) -> CGFloat{
+    private func invert(_ val : CGFloat) -> CGFloat{
         if (val > 0.6 && val < 0.90){
             return 0.6 + 0.1
         }
         return (1.0 - val)
     }
     
-    private var urlToPlay : URL?
-    
-    func setUpView(urlToPlay : URL, lineWith : CGFloat?, lineSeperation : CGFloat?) {
-        if (lineWith != nil){
-            internalLineWidth = lineWith
-        }
-        if (lineSeperation != nil){
-            internalLineSeperation = lineSeperation
-        }
-        self.urlToPlay = urlToPlay
-    }
-    
     func commonInit(){
-        internalLineWidth = 2.0
-        internalLineSeperation = 1.0
-        //        self.addOverlayLabels()
         self.addCentreLine()
+        guard let lineWidth = dataSource?.lineWidth?() else {
+            return
+        }
+        guard let lineSeperation = dataSource?.lineSeperation?() else {
+            return
+        }
+        internalLineWidth = lineWidth
+        internalLineSeperation = lineSeperation
     }
     
     private func getPath(url : URL){
@@ -207,10 +209,9 @@ class IHWaveFormView: UIView, AVAudioPlayerDelegate {
     private func redrawView() {
         eraseView()
         self.commonInit()
-        self.getPath(url: urlToPlay!)
+        self.getPath(url: urlToPlay)
     }
 
-    
     private func generatePoints1(dBVal : String){
         let aPath = UIBezierPath()
         let floatVal : Float = Float(dBVal)!

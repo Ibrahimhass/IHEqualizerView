@@ -21,25 +21,39 @@
 //SOFTWARE.
 
 import UIKit
-class ViewController: UIViewController, IHWaveFormViewDelegate {
+class ViewController: UIViewController {
+    
+    @IBOutlet var musicView: IHWaveFormView!
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+//        self.musicView.setUpView(urlToPlay: url!, lineWith: 2.0, lineSeperation: 1.0)
+        self.musicView.backgroundColor = #colorLiteral(red: 0.9607843137, green: 0.9607843137, blue: 0.8509803922, alpha: 1)
+        self.musicView.delegate = self
+        self.musicView.dataSource = self
+        
+    }
+    
+}
+
+extension ViewController: IHWaveFormViewDelegate {
     func didFinishPlayBack() {
         print ("playBack Finished")
     }
     
     func didStartPlayingWithSuccess() {
-        "Playback started successfully"
+        print ("Playback started successfully")
     }
+}
+
+extension ViewController: IHWaveFormViewDataSource {
     
-    @IBOutlet var musicView: IHWaveFormView!
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    func urlToPlay() -> URL {
         var url : URL?
         let path = Bundle.main.path(forResource: "bensound-sunny.mp3", ofType:nil)!
         url = URL(fileURLWithPath: path)
-        self.musicView.setUpView(urlToPlay: url!, lineWith: 2.0, lineSeperation: 1.0)
-        self.musicView.backgroundColor = #colorLiteral(red: 0.9607843137, green: 0.9607843137, blue: 0.8509803922, alpha: 1)
-        self.musicView.delegate = self
-        
+        return url!
     }
+    
     
 }
