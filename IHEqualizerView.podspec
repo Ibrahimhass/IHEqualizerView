@@ -27,14 +27,14 @@ s.description      = 'SWIFT, Realtime Audio Visualiser. Line Visualiser having d
 
   s.ios.deployment_target = '10.0'
 
-  s.source_files = 'IHEqualizerView/Classes/**/*'
+  s.source_files = 'IHEqualizerView/Classes/*'
   
   # s.resource_bundles = {
   #   'IHEqualizerView' => ['IHEqualizerView/Assets/*.png']
   # }
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
-  #s.pod_target_xcconfig = { "SWIFT_VERSION" => "4.0" }
+  s.swift_version = '3.2'
   s.frameworks = 'UIKit', 'AVFoundation'
   # s.dependency 'AFNetworking', '~> 2.3'
 end
