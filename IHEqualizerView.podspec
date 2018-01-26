@@ -21,7 +21,7 @@ s.description      = 'SWIFT, Realtime Audio Visualiser. Line Visualiser having d
   s.homepage         = 'https://github.com/Ibrahimhass/IHEqualizerView'
   # s.screenshots     = 'https://camo.githubusercontent.com/629245e6ca6254235bea5347110c077967fad9a4/68747470733a2f2f692e737461636b2e696d6775722e636f6d2f48736458312e676966'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = { 'mdibrahimhassan@gmail.com'}
+  s.author           = { 'Md Ibrahim Hassan' => 'mdibrahimhassan@gmail.com' }
   s.source           = { :git => 'https://github.com/Ibrahimhass/IHEqualizerView.git', :tag => s.version.to_s }
   s.social_media_url = 'https://twitter.com/IbrahimH_ss_n'
 
