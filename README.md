@@ -1,6 +1,5 @@
 # IHEqualizerView
 
-[![CI Status](http://img.shields.io/travis/mdibrahimhassan@gmail.com/IHEqualizerView.svg?style=flat)](https://travis-ci.org/mdibrahimhassan@gmail.com/IHEqualizerView)
 [![Version](https://img.shields.io/cocoapods/v/IHEqualizerView.svg?style=flat)](http://cocoapods.org/pods/IHEqualizerView)
 [![License](https://img.shields.io/cocoapods/l/IHEqualizerView.svg?style=flat)](http://cocoapods.org/pods/IHEqualizerView)
 [![Platform](https://img.shields.io/cocoapods/p/IHEqualizerView.svg?style=flat)](http://cocoapods.org/pods/IHEqualizerView)
@@ -22,7 +21,7 @@ pod 'IHEqualizerView'
 
 ## Author
 
-mdibrahimhassan@gmail.com, mdibrahimhassan@gmail.com
+Md Ibrahim Hassan, mdibrahimhassan@gmail.com
 
 ## License
 
