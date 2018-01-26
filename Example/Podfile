@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'IHEqualizerView_Example' do
+  pod 'IHEqualizerView', :path => '../'
+
+  target 'IHEqualizerView_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
