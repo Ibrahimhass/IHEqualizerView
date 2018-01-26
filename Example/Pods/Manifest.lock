@@ -1,0 +1,16 @@
+PODS:
+  - IHEqualizerView (0.1.0)
+
+DEPENDENCIES:
+  - IHEqualizerView (from `../`)
+
+EXTERNAL SOURCES:
+  IHEqualizerView:
+    :path: ../
+
+SPEC CHECKSUMS:
+  IHEqualizerView: 0ccd4b45e83c851b3c569a48a26f499cf8b52a5c
+
+PODFILE CHECKSUM: 2bcea04c9f4202c08aa56b7f784c8890bd73c7a9
+
+COCOAPODS: 1.4.0.beta.1

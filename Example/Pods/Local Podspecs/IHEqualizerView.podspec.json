@@ -1,0 +1,22 @@
+{
+  "name": "IHEqualizerView",
+  "version": "0.1.0",
+  "summary": "A short description of IHEqualizerView.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/mdibrahimhassan@gmail.com/IHEqualizerView",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "mdibrahimhassan@gmail.com": "mdibrahimhassan@gmail.com"
+  },
+  "source": {
+    "git": "https://github.com/mdibrahimhassan@gmail.com/IHEqualizerView.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source_files": "IHEqualizerView/Classes/**/*"
+}

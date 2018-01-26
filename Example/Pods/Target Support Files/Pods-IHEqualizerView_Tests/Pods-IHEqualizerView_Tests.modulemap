@@ -1,0 +1,6 @@
+framework module Pods_IHEqualizerView_Tests {
+  umbrella header "Pods-IHEqualizerView_Tests-umbrella.h"
+
+  export *
+  module * { export * }
+}

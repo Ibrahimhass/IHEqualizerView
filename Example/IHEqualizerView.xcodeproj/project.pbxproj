@@ -14,6 +14,7 @@
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
 		D30B3B8050A9F087BF33248D /* Pods_IHEqualizerView_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01A29AA010DBC1035EF3B5A8 /* Pods_IHEqualizerView_Tests.framework */; };
+		DB343AF9201BA6640043E897 /* bensound-sunny.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = DB343AF8201BA6630043E897 /* bensound-sunny.mp3 */; };
 		E16EA20A5DA2CA7EA4FFFD44 /* Pods_IHEqualizerView_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 311D802AF4280EAFA6554DBF /* Pods_IHEqualizerView_Example.framework */; };
 /* End PBXBuildFile section */
 
@@ -31,7 +32,7 @@
 		01A29AA010DBC1035EF3B5A8 /* Pods_IHEqualizerView_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IHEqualizerView_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		311D802AF4280EAFA6554DBF /* Pods_IHEqualizerView_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IHEqualizerView_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		38DEF0506C6019F8C21AD527 /* Pods-IHEqualizerView_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IHEqualizerView_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-IHEqualizerView_Tests/Pods-IHEqualizerView_Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		4AAC29BA09900B015E8F979E /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		4AAC29BA09900B015E8F979E /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* IHEqualizerView_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IHEqualizerView_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACD51AFB9204008FA782 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -42,10 +43,11 @@
 		607FACE51AFB9204008FA782 /* IHEqualizerView_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IHEqualizerView_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
-		712DC14826BB96B4C9E84954 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		712DC14826BB96B4C9E84954 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		7F9686AA4269C016E57ACEA8 /* Pods-IHEqualizerView_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IHEqualizerView_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-IHEqualizerView_Tests/Pods-IHEqualizerView_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		80DEA1B8BB644A314049FA42 /* Pods-IHEqualizerView_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IHEqualizerView_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-IHEqualizerView_Example/Pods-IHEqualizerView_Example.debug.xcconfig"; sourceTree = "<group>"; };
-		C79FDDEC409923CC89F4B1BD /* IHEqualizerView.podspec */ = {isa = PBXFileReference; includeInIndex = 1; name = IHEqualizerView.podspec; path = ../IHEqualizerView.podspec; sourceTree = "<group>"; };
+		C79FDDEC409923CC89F4B1BD /* IHEqualizerView.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = IHEqualizerView.podspec; path = ../IHEqualizerView.podspec; sourceTree = "<group>"; };
+		DB343AF8201BA6630043E897 /* bensound-sunny.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "bensound-sunny.mp3"; sourceTree = "<group>"; };
 		F75B84FE56AEAF4549D87E6E /* Pods-IHEqualizerView_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IHEqualizerView_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-IHEqualizerView_Example/Pods-IHEqualizerView_Example.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -104,9 +106,10 @@
 		607FACD21AFB9204008FA782 /* Example for IHEqualizerView */ = {
 			isa = PBXGroup;
 			children = (
-				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
 				607FACD71AFB9204008FA782 /* ViewController.swift */,
 				607FACD91AFB9204008FA782 /* Main.storyboard */,
+				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
+				DB343AF8201BA6630043E897 /* bensound-sunny.mp3 */,
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
 				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
 				607FACD31AFB9204008FA782 /* Supporting Files */,
@@ -248,6 +251,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DB343AF9201BA6640043E897 /* bensound-sunny.mp3 in Resources */,
 				607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */,
 				607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */,
 				607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */,
