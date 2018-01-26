@@ -1,5 +1,13 @@
 # IHEqualizerView
+
+[![Version](https://img.shields.io/cocoapods/v/IHEqualizerView.svg?style=flat)](http://cocoapods.org/pods/IHEqualizerView)
+[![License](https://img.shields.io/cocoapods/l/IHEqualizerView.svg?style=flat)](http://cocoapods.org/pods/IHEqualizerView)
+[![Platform](https://img.shields.io/cocoapods/p/IHEqualizerView.svg?style=flat)](http://cocoapods.org/pods/IHEqualizerView)
+
 A simple, intuitive audio asset visualiser for iOS.
+
+# Example
+To run the example project, clone the repo, and run `pod install` from the Example directory first.
 
 # HighLights
 Written purely in SWIFT. Very simple and lightweight. Hardly 128 lines of Code. Color Coding for differnt output range 
@@ -19,7 +27,16 @@ To begin using IHEqualizerView you must first make sure you have the proper buil
 
 10.0+
 
-# Adding To Project
+## Installation
+
+IHEqualizerView is available through [CocoaPods](http://cocoapods.org). To install
+it, simply add the following line to your Podfile:
+
+```ruby
+pod 'IHEqualizerView'
+```
+
+# Adding Manually To Project
 
 You can add IHEqualizerView to your project in a few ways: 
 
@@ -40,4 +57,12 @@ Make the UIView a subclass of IHEqualizerView, make its outlet and initialise as
     let path = Bundle.main.path(forResource: "bensound-sunny.mp3", ofType:nil)!
     url = URL(fileURLWithPath: path)
     self.musicView.setUpView(urlToPlay: url!, lineWith: 2.0, lineSeperation: 1.0)
+    
+## Author
+
+Md Ibrahim Hassan, mdibrahimhassan@gmail.com
+
+## License
+
+IHEqualizerView is available under the MIT license. See the LICENSE file for more info.
 
