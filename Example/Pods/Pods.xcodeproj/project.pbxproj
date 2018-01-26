@@ -45,7 +45,7 @@
 		5513C61E8757FB8F77B7741C4077A1BE /* Pods-IHEqualizerView_Tests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-IHEqualizerView_Tests-frameworks.sh"; sourceTree = "<group>"; };
 		55AD2F0A4497DC7000C66C73D1083501 /* IHEqualizerView-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "IHEqualizerView-prefix.pch"; sourceTree = "<group>"; };
 		6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		73B40CBF24FC5C8CB0428C7D99FB511E /* IHWaveFormView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IHWaveFormView.swift; path = IHEqualizerView/Classes/IHWaveFormView.swift; sourceTree = "<group>"; };
+		73B40CBF24FC5C8CB0428C7D99FB511E /* IHWaveFormView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IHWaveFormView.swift; sourceTree = "<group>"; };
 		7B9993FB5C6128CD3F3FF2A7A393997D /* Pods_IHEqualizerView_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IHEqualizerView_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7BDBA4C0B5DFFC66F2C51CCD2B02C7A5 /* IHEqualizerView.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = IHEqualizerView.modulemap; sourceTree = "<group>"; };
 		84E463466F5EF0B746B1FC6FFFEEFD46 /* IHEqualizerView-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "IHEqualizerView-umbrella.h"; sourceTree = "<group>"; };
@@ -186,6 +186,14 @@
 			name = iOS;
 			sourceTree = "<group>";
 		};
+		DB70096C201BBB4400DEB427 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				73B40CBF24FC5C8CB0428C7D99FB511E /* IHWaveFormView.swift */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
 		DCDC5FD96D77D4282E957B62BA3AFD5E /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -199,7 +207,7 @@
 		F3F873059D01D0BB2D0CBD10C82A44C5 /* IHEqualizerView */ = {
 			isa = PBXGroup;
 			children = (
-				73B40CBF24FC5C8CB0428C7D99FB511E /* IHWaveFormView.swift */,
+				DB70096C201BBB4400DEB427 /* Classes */,
 				BF589DB76C16A4C94DD25C710B132C43 /* Support Files */,
 			);
 			name = IHEqualizerView;
