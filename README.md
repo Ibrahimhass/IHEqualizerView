@@ -51,12 +51,25 @@ The way to use IHEqualizerView is to download the IHWaveFormView class file in y
 Make the UIView a subclass of IHEqualizerView, make its outlet and initialise as follows:
 
     @IBOutlet var musicView: IHWaveFormView!
+    extension ViewController: IHWaveFormViewDataSource {
+    
+    func urlToPlay() -> URL {
+        //Getting the Path of the Audio Asset in this case this is bundled in to the main Bundle with the fileName
+        var url : URL?
+        let path = Bundle.main.path(forResource: "bensound-sunny.mp3", ofType:nil)!
+        url = URL(fileURLWithPath: path)
+        return url!
+        }
+        
+    func lineWidth() -> CGFloat {
+      return 2
+        }
+    
+    func lineSeperation() -> CGFloat {
+        return 1
+        }
 
-    // Getting the Path of the Audio Asset in this case this is bundled in to the main Bundle with the fileName 
-    var url : URL?
-    let path = Bundle.main.path(forResource: "bensound-sunny.mp3", ofType:nil)!
-    url = URL(fileURLWithPath: path)
-    self.musicView.setUpView(urlToPlay: url!, lineWith: 2.0, lineSeperation: 1.0)
+    }
     
 ## Author
 
