@@ -22,6 +22,7 @@
 
 import UIKit
 import AVFoundation
+import Accelerate
 
 protocol IHWaveFormViewDelegate : class {
     func didFinishPlayBack()
@@ -30,8 +31,10 @@ protocol IHWaveFormViewDelegate : class {
 
 @objc protocol IHWaveFormViewDataSource : class {
     func urlToPlay() -> URL
+    @objc optional func preRender() -> Bool
     @objc optional func lineWidth() -> CGFloat
     @objc optional func lineSeperation() -> CGFloat
+    
 }
 
 class IHWaveFormView: UIView, AVAudioPlayerDelegate {
@@ -41,23 +44,30 @@ class IHWaveFormView: UIView, AVAudioPlayerDelegate {
     private var totalCount : Int = 0
     private var xPoint : CGFloat = 0.0
     private var gameTimer: Timer!
-    private var internalLineWidth : CGFloat = 2.0
-    private var internalLineSeperation : CGFloat = 1.0
+    fileprivate var internalLineWidth : CGFloat = 2.0
+    fileprivate var internalLineSeperation : CGFloat = 1.0
+    private var preRender : Bool = false
     fileprivate var width : CGFloat?
     
     private var urlToPlay : URL {
         return (dataSource?.urlToPlay())!
     }
-
+    
     weak var delegate : IHWaveFormViewDelegate?
     weak var dataSource : IHWaveFormViewDataSource? {
         didSet {
             if (dataSource?.urlToPlay() != nil) {
+                guard  let preRenderOption = dataSource?.preRender?() else {
+                    self.getPath(url: (dataSource?.urlToPlay())!)
+                    preRender = false
+                    return
+                }
+                preRender = preRenderOption
                 self.getPath(url: (dataSource?.urlToPlay())!)
             }
         }
     }
-
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         xPoint = 0.0
@@ -76,13 +86,13 @@ class IHWaveFormView: UIView, AVAudioPlayerDelegate {
     var orientationChangesCount : Int = 0
     func rotated(sender: UIDeviceOrientation) {
         orientationChangesCount += 1
-            if (orientationChangesCount == 1) {
-                return
-            }
+        if (orientationChangesCount == 1) {
+            return
+        }
         redrawView()
     }
     
-   private func eraseView() {
+    private func eraseView() {
         for views in subviews {
             views.removeFromSuperview()
         }
@@ -132,19 +142,23 @@ class IHWaveFormView: UIView, AVAudioPlayerDelegate {
     }
     
     private func getPath(url : URL){
+        if (preRender) {
+            preRender(withPath: url)
+            return
+        }
         do {
             if player != nil,
                 (player.isPlaying) {
                 xPoint = 0
-                    for i in dataArray {
-                        if (xPoint < CGFloat(player.currentTime) / CGFloat(player.duration) * self.bounds.width) {
-                            let twoDecimalPlaces = String(format: "%.2f", i)
-                            self.generatePoints1(dBVal: twoDecimalPlaces)
-                        }
-                        else{
-                            break
-                        }
+                for i in dataArray {
+                    if (xPoint < CGFloat(player.currentTime) / CGFloat(player.duration) * self.bounds.width) {
+                        let twoDecimalPlaces = String(format: "%.2f", i)
+                        self.generatePoints1(dBVal: twoDecimalPlaces)
                     }
+                    else{
+                        break
+                    }
+                }
                 
                 let val : CGFloat = CGFloat(player.duration) / (CGFloat(self.frame.size.width - xPoint) * CGFloat(player.rate))
                 self.trackAudio()
@@ -211,8 +225,8 @@ class IHWaveFormView: UIView, AVAudioPlayerDelegate {
         self.commonInit()
         self.getPath(url: urlToPlay)
     }
-
-    private func generatePoints1(dBVal : String){
+    
+    fileprivate func generatePoints1(dBVal : String){
         let aPath = UIBezierPath()
         let floatVal : Float = Float(dBVal)!
         let fromYPoint : CGFloat = self.makeNewWaveForm(CGFloat(floatVal))
@@ -253,6 +267,46 @@ class IHWaveFormView: UIView, AVAudioPlayerDelegate {
         xPoint += internalLineWidth
     }
 }
+
+// Pre Render Code and Logic
+extension IHWaveFormView {
+    
+    func preRender(withPath url: URL) {
+        getDataArray(withPath: url, completionHandler: {value in
+            DispatchQueue.main.async {
+                for element in value {
+                    let twoDecimalPlaces = String(format: "%.2f", log(abs(element)))
+                    self.generatePoints1(dBVal: twoDecimalPlaces)
+                }
+            }
+        })
+    }
+    
+    private func getDataArray(withPath audioFileURL : URL, completionHandler: @escaping(_ success: [Float]) -> () ) {
+        let audioFile = try! AVAudioFile(forReading: audioFileURL)
+        let audioFilePFormat = audioFile.processingFormat
+        let audioFileLength = audioFile.length
+        // get numberOfReadLoops value
+        let numberOfReadLoops = Int(self.frame.width / (internalLineWidth + internalLineSeperation))
+        let frameSizeToRead = Int(audioFileLength) / numberOfReadLoops
+        DispatchQueue.global(qos: .userInitiated).async {
+            var returnArray : [Float] = []
+            for i in 0..<numberOfReadLoops {
+                audioFile.framePosition = AVAudioFramePosition(i * frameSizeToRead)
+                let audioBuffer = AVAudioPCMBuffer(pcmFormat: audioFilePFormat, frameCapacity: AVAudioFrameCount(frameSizeToRead))
+                try! audioFile.read(into: audioBuffer, frameCount: AVAudioFrameCount(frameSizeToRead))
+                let channelData = audioBuffer.floatChannelData![0]
+                let arr = Array(UnsafeBufferPointer(start:channelData, count: frameSizeToRead))
+                let positiveArray = arr.map({ $0 })
+                let sum = positiveArray.reduce(0, +)
+                returnArray.append( sum / (Float(positiveArray.count)))
+                completionHandler(returnArray)
+                returnArray.removeAll()
+            }
+        }
+    }
+    
+}
 //    func addOverlayLabels() {
 //        let values : [String] = ["0", "-1", "-3", "-6", "-7", "-10"]
 //        var valuesFinal : [String] = values
@@ -273,3 +327,4 @@ class IHWaveFormView: UIView, AVAudioPlayerDelegate {
  }
  return (val * 0.9 * 0.1)
  }*/
+
