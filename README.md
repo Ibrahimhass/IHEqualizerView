@@ -10,12 +10,13 @@ A simple, intuitive audio asset visualiser for iOS.
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
 
 # HighLights
-Written purely in SWIFT. Very simple and lightweight. Hardly 128 lines of Code. Color Coding for differnt output range 
+Written purely in SWIFT. Very simple and lightweight. Color Coding for differnt output range.  
 
 * Pale red for low output
 * Light red for medium
 * Red for high output
 * Based on the output distribution pattern of Recorder App from Apple
+* Option to pre-render audio file
 
 # Getting Started
 
@@ -71,7 +72,11 @@ Make the UIView a subclass of IHEqualizerView, make its outlet and initialise as
     func lineSeperation() -> CGFloat {
         return 1
         }
-
+        
+    func shouldPreRender() -> Bool {
+        return true
+    }
+    
     }
     
 ## Author
