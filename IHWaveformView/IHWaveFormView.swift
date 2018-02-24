@@ -31,7 +31,7 @@ protocol IHWaveFormViewDelegate : class {
 
 @objc protocol IHWaveFormViewDataSource : class {
     func urlToPlay() -> URL
-    @objc optional func preRender() -> Bool
+    @objc optional func shouldPreRender() -> Bool
     @objc optional func lineWidth() -> CGFloat
     @objc optional func lineSeperation() -> CGFloat
     
@@ -57,7 +57,7 @@ class IHWaveFormView: UIView, AVAudioPlayerDelegate {
     weak var dataSource : IHWaveFormViewDataSource? {
         didSet {
             if (dataSource?.urlToPlay() != nil) {
-                guard  let preRenderOption = dataSource?.preRender?() else {
+                guard  let preRenderOption = dataSource?.shouldPreRender?() else {
                     self.getPath(url: (dataSource?.urlToPlay())!)
                     preRender = false
                     return
@@ -100,7 +100,9 @@ class IHWaveFormView: UIView, AVAudioPlayerDelegate {
     }
     
     func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
-        self.gameTimer.invalidate()
+        if (self.gameTimer.isValid) {
+            self.gameTimer.invalidate()
+        }
         delegate?.didFinishPlayBack()
     }
     
@@ -143,7 +145,13 @@ class IHWaveFormView: UIView, AVAudioPlayerDelegate {
     
     private func getPath(url : URL){
         if (preRender) {
-            preRender(withPath: url)
+            preRenderAudioFile(withPath: url, completion: { result in
+                if (result) {
+                    self.player = try? AVAudioPlayer(contentsOf: url)
+                    self.player.delegate = self
+                    self.player.play()
+                }
+            })
             return
         }
         do {
@@ -271,13 +279,14 @@ class IHWaveFormView: UIView, AVAudioPlayerDelegate {
 // Pre Render Code and Logic
 extension IHWaveFormView {
     
-    func preRender(withPath url: URL) {
+    func preRenderAudioFile(withPath url: URL, completion : @escaping(_ rendered: Bool) -> () ) {
         getDataArray(withPath: url, completionHandler: {value in
             DispatchQueue.main.async {
                 for element in value {
                     let twoDecimalPlaces = String(format: "%.2f", log(abs(element)))
                     self.generatePoints1(dBVal: twoDecimalPlaces)
                 }
+                completion(true)
             }
         })
     }

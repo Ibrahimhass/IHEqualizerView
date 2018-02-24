@@ -55,7 +55,7 @@ extension ViewController: IHWaveFormViewDataSource {
         return url!
     }
     
-    func preRender() -> Bool {
+    func shouldPreRender() -> Bool {
         return true
     }
     
