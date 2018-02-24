@@ -100,9 +100,11 @@ class IHWaveFormView: UIView, AVAudioPlayerDelegate {
     }
     
     func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
-        if (self.gameTimer.isValid) {
-            self.gameTimer.invalidate()
+        guard let gameTimer = gameTimer else {
+            delegate?.didFinishPlayBack()
+            return
         }
+        gameTimer.invalidate()
         delegate?.didFinishPlayBack()
     }
     
