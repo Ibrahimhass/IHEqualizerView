@@ -84,7 +84,7 @@ class IHWaveFormView: UIView, AVAudioPlayerDelegate {
     }
     
     var orientationChangesCount : Int = 0
-    func rotated(sender: UIDeviceOrientation) {
+    @objc func rotated(sender: UIDeviceOrientation) {
         orientationChangesCount += 1
         if (orientationChangesCount == 1) {
             return
@@ -221,7 +221,7 @@ class IHWaveFormView: UIView, AVAudioPlayerDelegate {
     }
     
     @objc private func trackAudio() {
-        NotificationCenter.default.addObserver(self, selector: #selector(rotated(sender:)), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(rotated(sender:)), name: UIDevice.orientationDidChangeNotification, object: nil)
         player.updateMeters()
         let dBLogValue : Float = player.averagePower(forChannel: 0)
         dataArray.append(dBLogValue)
@@ -304,15 +304,16 @@ extension IHWaveFormView {
             var returnArray : [Float] = []
             for i in 0..<numberOfReadLoops {
                 audioFile.framePosition = AVAudioFramePosition(i * frameSizeToRead)
-                let audioBuffer = AVAudioPCMBuffer(pcmFormat: audioFilePFormat, frameCapacity: AVAudioFrameCount(frameSizeToRead))
-                try! audioFile.read(into: audioBuffer, frameCount: AVAudioFrameCount(frameSizeToRead))
-                let channelData = audioBuffer.floatChannelData![0]
-                let arr = Array(UnsafeBufferPointer(start:channelData, count: frameSizeToRead))
-                let positiveArray = arr.map({ $0 })
-                let sum = positiveArray.reduce(0, +)
-                returnArray.append( sum / (Float(positiveArray.count)))
-                completionHandler(returnArray)
-                returnArray.removeAll()
+                if let audioBuffer = AVAudioPCMBuffer(pcmFormat: audioFilePFormat, frameCapacity: AVAudioFrameCount(frameSizeToRead)) {
+                    try! audioFile.read(into: audioBuffer, frameCount: AVAudioFrameCount(frameSizeToRead))
+                    let channelData = audioBuffer.floatChannelData![0]
+                    let arr = Array(UnsafeBufferPointer(start:channelData, count: frameSizeToRead))
+                    let positiveArray = arr.map({ $0 })
+                    let sum = positiveArray.reduce(0, +)
+                    returnArray.append( sum / (Float(positiveArray.count)))
+                    completionHandler(returnArray)
+                    returnArray.removeAll()
+                }
             }
         }
     }
