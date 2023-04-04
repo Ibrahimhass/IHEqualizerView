@@ -43,7 +43,7 @@ You can add IHEqualizerView to your project in a few ways:
 
 The way to use IHEqualizerView is to download the IHWaveFormView class file in your project as is and use.
 
-# ScreenShot
+# Screen Recordings
 ![simulator screen shot 16-aug-2017 12 23 44 am](https://i.stack.imgur.com/HsdX1.gif)
 
 ![10 pixel width](https://user-images.githubusercontent.com/16992520/35468838-fc468080-034c-11e8-8a21-ac2be0721cf6.gif)
