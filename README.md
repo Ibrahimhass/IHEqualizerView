@@ -4,8 +4,8 @@ A simple, intuitive audio asset visualiser for iOS.
 # Example
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
 
-# HighLights
-Written purely in SWIFT. Very simple and lightweight. Color Coding for differnt output range.  
+# Highlights
+Very simple and lightweight. Color Coding for differnt output range. Written in Swift.
 
 * Pale red for low output
 * Light red for medium
