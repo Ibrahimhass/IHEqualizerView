@@ -1,9 +1,4 @@
 # IHEqualizerView
-
-[![Version](https://img.shields.io/cocoapods/v/IHEqualizerView.svg?style=flat)](http://cocoapods.org/pods/IHEqualizerView)
-[![License](https://img.shields.io/cocoapods/l/IHEqualizerView.svg?style=flat)](http://cocoapods.org/pods/IHEqualizerView)
-[![Platform](https://img.shields.io/cocoapods/p/IHEqualizerView.svg?style=flat)](http://cocoapods.org/pods/IHEqualizerView)
-
 A simple, intuitive audio asset visualiser for iOS.
 
 # Example
@@ -58,25 +53,18 @@ Make the UIView a subclass of IHEqualizerView, make its outlet and initialise as
     extension ViewController: IHWaveFormViewDataSource {
     
     func urlToPlay() -> URL {
-        //Getting the Path of the Audio Asset in this case this is bundled in to the main Bundle with the fileName
         var url : URL?
         let path = Bundle.main.path(forResource: "bensound-sunny.mp3", ofType:nil)!
         url = URL(fileURLWithPath: path)
+        
         return url!
-        }
-        
-    func lineWidth() -> CGFloat {
-      return 2
-        }
-    
-    func lineSeperation() -> CGFloat {
-        return 1
-        }
-        
-    func shouldPreRender() -> Bool {
-        return true
     }
-    
+
+    func lineWidth() -> CGFloat { 2 }
+
+    func lineSeperation() -> CGFloat { 1 }
+
+    func shouldPreRender() -> Bool { true }
     }
     
 ## Author
